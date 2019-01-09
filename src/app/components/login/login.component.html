@@ -1,0 +1,8 @@
+<form [formGroup]="loginform" (ngSubmit)="iniciar_sesion()">
+  <input type="email" formControlName="email" placeholder="nombre de usuario">
+  <p *ngIf="loginform.controls['email'].touched">hola</p>
+  <br>
+  <input type="password" formControlName="password" placeholder="contraseña">
+  <br>
+  <input type="submit" value="iniciar sesion" class="btn btn-success">
+</form>
