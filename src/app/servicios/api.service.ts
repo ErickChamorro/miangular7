@@ -17,4 +17,9 @@ export class ApiService {
     const api_url = 'https://reqres.in/api/login';
     return this.http.post(api_url, values);
   }
+
+  registrar_usuario(values) {
+    const api_url = 'https://reqres.in/api/register';
+    return this.http.post(api_url, values);
+  }
 }

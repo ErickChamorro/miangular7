@@ -1,38 +1,51 @@
 <div class="container">
-  <form [formGroup]="registroform">
+  <form [formGroup]="registroform" (ngSubmit)="registrar()">
     <div class="form-group">
-      <label for="fname">Nombres:</label>
-      <input type="text" class="form-control" formControlName="fname"
-      [ngClass]="{ 'is-invalid': registroform.get('fname').touched && registroform.get('fname').invalid }">
-      <div *ngIf="registroform.get('fname').touched && registroform.get('fname').invalid" class="invalid-feedback">
-        <div *ngIf="registroform.get('fname').errors['required']">Este campo es requerido!</div>
+      <label for="firstName">Nombres:</label>
+      <input type="text" class="form-control" formControlName="firstName" id="firstName" name="firstName"
+      [ngClass]="{ 'is-invalid': f['firstName'].touched && f['firstName'].invalid }">
+      <div *ngIf="f['firstName'].touched && f['firstName'].errors" class="invalid-feedback">
+        <p>Este campo es requerido!</p>
       </div>
     </div>
     <div class="form-group">
-      <label for="lname">Apellidos:</label>
-      <input type="text" class="form-control" formControlName="lname"
-      [ngClass]="{ 'is-invalid': registroform.get('lname').touched && registroform.get('lname').invalid }">
-      <div *ngIf="registroform.get('lname').touched && registroform.get('lname').invalid" class="invalid-feedback">
+      <label for="lastName">Apellidos:</label>
+      <input type="text" class="form-control" formControlName="lastName"
+      [ngClass]="{ 'is-invalid': f['lastName'].touched && f['lastName'].invalid }">
+      <div *ngIf="f['lastName'].touched && f['lastName'].errors" class="invalid-feedback">
         <div>También es requerido!</div>
       </div>
     </div>
     <div class="form-group">
       <label for="email">Correo electrónico:</label>
       <input type="email" class="form-control" formControlName="email"
-      [ngClass]="{ 'is-invalid': registroform.get('email').touched && registroform.get('email').invalid }">
-      <div *ngIf="registroform.get('email').touched && registroform.get('email').invalid" class="invalid-feedback">
-        <div *ngIf="registroform.get('email').errors['required']">Correo es requerido!</div>
-        <div *ngIf="registroform.get('email').errors['email']">Debe ser una dirección de correo válida!</div>
+      [ngClass]="{ 'is-invalid': f['email'].touched && f['email'].invalid }">
+      <div *ngIf="f['email'].touched && f['email'].errors" class="invalid-feedback">
+        <p>Correo es requerido!</p>
+        <p *ngIf="f['email'].touched && f['email'].errors.email">Debe ser una dirección de correo válida!</p>
       </div>
     </div>
     <div class="form-group">
       <label for="password">Contraseña:</label>
-      <input type="text" class="form-control" formControlName="password"
-      [ngClass]="{ 'is-invalid': registroform.get('password').touched && registroform.get('password').invalid }">
-      <div *ngIf="registroform.get('password').touched && registroform.get('password').invalid" class="invalid-feedback">
-        <div *ngIf="registroform.get('password').errors['required']">OBVIO que la contraseña tambien es requerido!</div>
-        <div *ngIf="registroform.get('password').errors['minLength']">Debe contener al menos 6 caracteres.</div>
+      <input type="password" class="form-control" formControlName="password"
+      [ngClass]="{ 'is-invalid': f['password'].touched && f['password'].invalid }">
+      <div *ngIf="f['password'].touched && f['password'].errors" class="invalid-feedback">
+        <p *ngIf="f['password'].touched && f['password'].errors.required">OBVIO que la contraseña tambien es requerido!</p>
+        <p *ngIf="f['password'].touched && f['password'].invalid">Debe contener al menos 6 caracteres.</p>
       </div>
+    </div>
+    <div class="form-group">
+      <label for="confirmPassword">Confirmar contraseña:</label>
+      <input type="password" class="form-control" formControlName="confirmPassword"
+      [ngClass]="{ 'is-invalid': f['confirmPassword'].touched && f['confirmPassword'].invalid }">
+      <div *ngIf="f['confirmPassword'].touched && f['confirmPassword'].errors" class="invalid-feedback">
+        <p *ngIf="f['confirmPassword'].touched && f['confirmPassword'].errors.required">y esto también es requerido!</p>
+        <p *ngIf="f['confirmPassword'].touched && f['confirmPassword'].invalid">Debe contener al menos 6 caracteres.</p>
+        <p *ngIf="f['confirmPassword'].touched && registroform.get('password').value !== registroform.get('confirmPassword').value">Contraseñas no coinciden.</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary" [disabled]="!registroform.valid">Registrar datos de usuario</button>
     </div>
   </form>
 </div>
